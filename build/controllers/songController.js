@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTotalSongCount = exports.deleteSong = exports.removeAllSongs = exports.updateSong = exports.listSongs = exports.createSong = void 0;
+exports.getTotalSongCount = exports.deleteSong = exports.removeAllSongs = exports.updateSong = exports.getAggregated = exports.listSongs = exports.createSong = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const songModel_1 = __importDefault(require("../Models/songModel"));
 // @desc create a song
@@ -47,6 +47,20 @@ exports.createSong = (0, express_async_handler_1.default)(async (req, res) => {
 exports.listSongs = (0, express_async_handler_1.default)(async (req, res) => {
     const songs = await songModel_1.default.find({});
     res.status(200).send(songs);
+});
+// @desc list aggregated
+// @route GET /aggregated
+exports.getAggregated = (0, express_async_handler_1.default)(async (req, res) => {
+    let results = await songModel_1.default.aggregate([
+        // stage1
+        {
+            $project: {
+                _id: 1,
+                title: 1,
+            },
+        },
+    ]).exec();
+    res.status(200).send(results);
 });
 const updateSong = async (req, res) => {
     const songId = req.params.id;

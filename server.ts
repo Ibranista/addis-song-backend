@@ -17,7 +17,7 @@ console.log("port: ", process.env.MONGO_URI);
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+// body-parser uses the core Node.js module querystring for parsing of URL-encoded data
 app.get("/", (req, res) => {
   res.send("port is working");
 });

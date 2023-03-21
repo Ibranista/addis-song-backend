@@ -47,6 +47,21 @@ export const listSongs = asyncHandler(async (req, res) => {
   res.status(200).send(songs);
 });
 
+// @desc list aggregated
+// @route GET /aggregated
+export const getAggregated = asyncHandler(async (req, res) => {
+  let results = await Song.aggregate([
+    // stage1
+    {
+      $project: {
+        _id: 1,
+        title: 1,
+      },
+    },
+  ]).exec();
+  res.status(200).send(results);
+});
+
 // @desc update a song
 // @route PUT /songs/:id
 

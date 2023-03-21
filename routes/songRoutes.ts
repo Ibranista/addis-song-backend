@@ -6,6 +6,7 @@ import {
   removeAllSongs,
   deleteSong,
   getTotalSongCount,
+  getAggregated,
 } from "../controllers/songController";
 
 const router = express.Router();
@@ -16,4 +17,5 @@ router.put("/:id", updateSong);
 router.delete("/removeAll", removeAllSongs);
 router.delete("/:id", deleteSong);
 router.get("/songCount", getTotalSongCount);
+router.get("/aggregated", getAggregated);
 export default router;
