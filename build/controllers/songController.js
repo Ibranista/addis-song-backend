@@ -58,17 +58,14 @@ exports.getAggregated = (0, express_async_handler_1.default)(async (req, res) =>
                 _id: 1,
                 title: 1,
                 // timeStamp
-                createdAt: {
-                    $dateToString: {
-                        format: "%Y-%m-%d",
-                        date: "$createdAt",
-                    },
-                },
+                createdAt: 1,
             },
         },
         // stage2
         {
-            $sort: { title: 1 },
+            // $sort: { title: 1 },
+            // $sort: { createdAt: -1 },
+            $sort: { createdAt: 1 },
         },
         // stage 3
         {
