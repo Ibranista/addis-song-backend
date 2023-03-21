@@ -1,24 +1,27 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
-const songSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
+const songSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    artist: {
+      type: String,
+      required: true,
+    },
+    album: {
+      type: String,
+      required: true,
+    },
+    genre: {
+      type: String,
+      required: true,
+    },
   },
-  artist: {
-    type: String,
-    required: true,
-  },
-  album: {
-    type: String,
-    required: true,
-  },
-  genre: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 const Song = model("Song", songSchema);
 export default Song;

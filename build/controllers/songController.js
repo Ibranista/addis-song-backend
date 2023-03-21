@@ -57,7 +57,22 @@ exports.getAggregated = (0, express_async_handler_1.default)(async (req, res) =>
             $project: {
                 _id: 1,
                 title: 1,
+                // timeStamp
+                createdAt: {
+                    $dateToString: {
+                        format: "%Y-%m-%d",
+                        date: "$createdAt",
+                    },
+                },
             },
+        },
+        // stage2
+        {
+            $sort: { title: 1 },
+        },
+        // stage 3
+        {
+            $limit: 3,
         },
     ]).exec();
     res.status(200).send(results);

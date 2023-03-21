@@ -22,6 +22,6 @@ const songSchema = new Schema({
         type: String,
         required: true,
     },
-});
+}, { timestamps: true });
 const Song = model("Song", songSchema);
 exports.default = Song;
